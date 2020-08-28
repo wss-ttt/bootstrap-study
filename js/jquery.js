@@ -5314,7 +5314,6 @@ jQuery.Event = function( src, props ) {
 	}
 
 	// Put explicitly provided properties onto the event object
-	console.log('this', this) // 这个this是一个jQuery.Event实例对象
 	if ( props ) {
 		jQuery.extend( this, props );
 	}
@@ -5324,7 +5323,6 @@ jQuery.Event = function( src, props ) {
 
 	// Mark it as fixed
 	this[ jQuery.expando ] = true;
-	console.log( jQuery.expando )
 	this['test'] = 'wss'
 };
 

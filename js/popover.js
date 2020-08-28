@@ -41,10 +41,14 @@
   }
 
   Popover.prototype.setContent = function () {
+    debugger
     var $tip    = this.tip()
     var title   = this.getTitle()
     var content = this.getContent()
-
+    console.log($tip, title, content)
+    console.log($tip.find('.popover-content').children().detach().end())
+    console.log(this.options.html)
+    console.log('aa', $tip.find('.popover-title')['text'](title))
     $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
     $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
       this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
@@ -87,6 +91,9 @@
 
       if (!data && /destroy|hide/.test(option)) return
       if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
+      console.log('options', options)
+      console.log('option', option)
+      console.log(typeof option == 'string')
       if (typeof option == 'string') data[option]()
     })
   }
