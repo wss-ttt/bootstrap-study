@@ -7,59 +7,36 @@
     <link rel="stylesheet" href="css/bootstrap.css" />
   </head>
   <body>
-    <div>
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist" id="myTabs">
-        <li class="active">
-          <a href="#home" aria-controls="home" role="tab" data-toggle="tab"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a
-            href="#profile"
-            aria-controls="profile"
-            role="tab"
-            data-toggle="tab"
-            >Profile</a
-          >
-        </li>
-        <li>
-          <a
-            href="#messages"
-            aria-controls="messages"
-            role="tab"
-            data-toggle="tab"
-            >Messages</a
-          >
-        </li>
-        <li>
-          <a
-            href="#settings"
-            aria-controls="settings"
-            role="tab"
-            data-toggle="tab"
-            >Settings</a
-          >
-        </li>
-      </ul>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTabs">
+      <li class="active">
+        <a href="#home"></a>
+        <!-- <a data-target="#home">Home</a> -->
+      </li>
+      <li>
+        <a href="#profile">Profile</a>
+      </li>
+      <li>
+        <a href="#messages">Messages</a>
+      </li>
+      <li>
+        <a href="#settings">Settings</a>
+      </li>
+    </ul>
 
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div class="tab-pane active" id="home">home</div>
-        <div class="tab-pane" id="profile">profile</div>
-        <div class="tab-pane" id="messages">messages</div>
-        <div class="tab-pane" id="settings">settings</div>
-      </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="home">home</div>
+      <div class="tab-pane" id="profile">profile</div>
+      <div class="tab-pane" id="messages">messages</div>
+      <div class="tab-pane" id="settings">settings</div>
     </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-    <!-- <script src="js/bootstrap.js"></script> -->
-    <!-- <script src="js/tab.js"></script> -->
-    <script src="js/_tab.js"></script>
+    <script src="js/myTab.js"></script>
     <script>
       $('#myTabs a').click(function (e) {
-        /* e.preventDefault()
-        $(this).tab('show') */
+        e.preventDefault()
+        $(this).tab('show')
       })
     </script>
   </body>
