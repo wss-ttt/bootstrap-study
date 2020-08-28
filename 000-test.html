@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>$.Event</title>
+  </head>
+  <body>
+    <input type="text" id="input-1" />
+    <script src="js/jquery.js"></script>
+    <script>
+      $(function () {
+        // 自定义一个事件对象
+        // var e = jQuery.Event('aa', { name: 65 })
+        var e = new jQuery.Event('aa', {name: 65})
+        // 监听自定义事件
+        $('#input-1').on('aa', function (event, data) {
+          console.log(event.name) //初始化的时候输出 65
+          console.log(data)
+        })
+        // 触发自定义事件
+        $('#input-1').trigger(e, {
+          msg: 'aa'
+        })
+      })
+    </script>
+  </body>
+</html>
