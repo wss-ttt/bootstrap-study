@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+      .box {
+        width: 400px;
+        height: 400px;
+        margin: 200px auto;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Button trigger modal -->
+    <span data-toggle="modal" data-target="#myModal">打开模窗</span>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >
+              <span>&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/_modal.js"></script>
+    <script>
+    </script>
+  </body>
+</html>
