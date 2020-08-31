@@ -124,8 +124,8 @@
 
     this.$element
       .removeClass('in')
-      .off('click.dismiss.bs.modal')
-      .off('mouseup.dismiss.bs.modal')
+      // .off('click.dismiss.bs.modal')
+      // .off('mouseup.dismiss.bs.modal')
 
     this.$dialog.off('mousedown.dismiss.bs.modal')
 
@@ -290,6 +290,7 @@
   // =======================
 
   function Plugin(option, _relatedTarget) {
+    console.log('_relatedTarget', _relatedTarget)
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.modal')
@@ -322,7 +323,9 @@
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
     var $this   = $(this)
     var href    = $this.attr('href')
-    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
+    // var t = $this.attr('data-target') // 可以使用attr来获取data-*的值
+    var t = $this.data('target') // 可以使用data(*)来获取data-*的值
+    var $target = $(t || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
     var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
     if ($this.is('a')) e.preventDefault()
