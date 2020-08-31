@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+  </head>
+  <body>
+    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+    <script src="js/jquery.js"></script>
+    <script src="js/tooltip.js"></script>
+    <script>
+      $(function () {
+        let $ele = $('[data-toggle="tooltip"]')
+        $ele.tooltip()
+      })
+    </script>
+  </body>
+</html>
