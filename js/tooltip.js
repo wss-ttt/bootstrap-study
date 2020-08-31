@@ -30,6 +30,7 @@
 
   Tooltip.TRANSITION_DURATION = 150
 
+  // 默认配置 
   Tooltip.DEFAULTS = {
     animation: true,
     placement: 'top',
@@ -50,7 +51,9 @@
     this.enabled   = true
     this.type      = type
     this.$element  = $(element)
+    // 在这个地方进行合并参数
     this.options   = this.getOptions(options)
+    console.log('this.options', this.options)
     this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
     this.inState   = { click: false, hover: false, focus: false }
 
@@ -58,7 +61,7 @@
       throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
     }
 
-    var triggers = this.options.trigger.split(' ')
+    var triggers = this.options.trigger.split(' ') // ['hover', 'focus']
 
     for (var i = triggers.length; i--;) {
       var trigger = triggers[i]
@@ -68,7 +71,7 @@
       } else if (trigger != 'manual') {
         var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
         var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
-
+        // this.$element.on('mouseenter.tooltip', false, $.proxy(this.enter, this))
         this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
         this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
       }
@@ -84,8 +87,8 @@
   }
 
   Tooltip.prototype.getOptions = function (options) {
+    // 在这个地方进行合并参数
     options = $.extend({}, this.getDefaults(), this.$element.data(), options)
-
     if (options.delay && typeof options.delay == 'number') {
       options.delay = {
         show: options.delay,
@@ -210,7 +213,7 @@
       var pos          = this.getPosition()
       var actualWidth  = $tip[0].offsetWidth
       var actualHeight = $tip[0].offsetHeight
-
+      console.log('autoPlace', autoPlace)
       if (autoPlace) {
         var orgPlacement = placement
         var viewportDim = this.getPosition(this.$viewport)
@@ -229,13 +232,16 @@
       var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
 
       this.applyPlacement(calculatedOffset, placement)
+      return
 
       var complete = function () {
         var prevHoverState = that.hoverState
         that.$element.trigger('shown.bs.' + that.type)
         that.hoverState = null
 
-        if (prevHoverState == 'out') that.leave(that)
+        if (prevHoverState == 'out') { 
+          that.leave(that) 
+        }
       }
 
       $.support.transition && this.$tip.hasClass('fade') ?
@@ -247,6 +253,7 @@
   }
 
   Tooltip.prototype.applyPlacement = function (offset, placement) {
+    // debugger
     var $tip   = this.tip()
     var width  = $tip[0].offsetWidth
     var height = $tip[0].offsetHeight
@@ -264,6 +271,16 @@
 
     // $.fn.offset doesn't round pixel values
     // so we use setOffset directly with our own function B-0
+    /* var res = $.extend({
+      using: function (props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        })
+      }
+    }, offset)
+    console.log('res', res) */
+    // 在这个地方设置了偏移量
     $.offset.setOffset($tip[0], $.extend({
       using: function (props) {
         $tip.css({
@@ -274,7 +291,7 @@
     }, offset), 0)
 
     $tip.addClass('in')
-
+    return
     // check to see if placing tip in new offset caused the tip to resize itself
     var actualWidth  = $tip[0].offsetWidth
     var actualHeight = $tip[0].offsetHeight
@@ -282,7 +299,6 @@
     if (placement == 'top' && actualHeight != height) {
       offset.top = offset.top + height - actualHeight
     }
-
     var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
 
     if (delta.left) offset.left += delta.left
@@ -495,11 +511,18 @@
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.tooltip')
+      // 这个是判断
+      // 如果option是一个对象, 就把option赋值给options变量
       var options = typeof option == 'object' && option
-
       if (!data && /destroy|hide/.test(option)) return
-      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
-      if (typeof option == 'string') data[option]()
+      if (!data) {
+        // 创建一个tooltip实例对象
+        data = new Tooltip(this, options)
+        $this.data('bs.tooltip', data)
+      } 
+      if (typeof option == 'string') {
+        data[option]()
+      }
     })
   }
 

@@ -2,25 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>$.Event</title>
+    <title>test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .out {
+        width: 400px;
+        height: 400px;
+        background: #ccc;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background: #1acd7e;
+        margin-top: 110px;
+        margin-left: 120px;
+        position: absolute;
+        top: 20px;
+        left: 30px;
+      }
+    </style>
   </head>
   <body>
-    <input type="text" id="input-1" />
+    <div class="box" data-sex="男">box</div>
+    <button type="button">确定</button>
     <script src="js/jquery.js"></script>
     <script>
-      $(function () {
-        // 自定义一个事件对象
-        // var e = jQuery.Event('aa', { name: 65 })
-        var e = new jQuery.Event('aa', {name: 65})
-        // 监听自定义事件
-        $('#input-1').on('aa', function (event, data) {
-          console.log(event.name) //初始化的时候输出 65
-          console.log(data)
-        })
-        // 触发自定义事件
-        $('#input-1').trigger(e, {
-          msg: 'aa'
-        })
+      console.log($('.box').offset())
+      $.offset.setOffset($('.box').get(0), {
+        top: 350,
+        left:300 
+      }, 0)
+      $('button').one('click', function() {
+        console.log('11')
       })
     </script>
   </body>

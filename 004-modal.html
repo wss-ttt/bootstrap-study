@@ -48,6 +48,10 @@
     <script src="js/jquery.js"></script>
     <script src="js/_modal.js"></script>
     <script>
+      $('#myModal').on('show.bs.modal', function(event) {
+        console.log(event.relatedTarget)
+        console.log('显示')
+      })
     </script>
   </body>
 </html>

@@ -5,15 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+
+      .box {
+        width: 400px;
+        height: 400px;
+        margin: 200px auto;
+        border: 1px solid red;
+      }
+    </style>
   </head>
   <body>
-    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+    <div class="box">
+      <button
+        type="button"
+        class="btn btn-default"
+        data-toggle="tooltip"
+        title="Tooltip on bottom"
+      >
+        Tooltip on bottom
+      </button>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script src="js/tooltip.js"></script>
     <script>
       $(function () {
         let $ele = $('[data-toggle="tooltip"]')
-        $ele.tooltip()
+        $ele.tooltip({
+          placement: 'right',
+          trigger: 'focus' // 触发模式
+        })
       })
     </script>
   </body>

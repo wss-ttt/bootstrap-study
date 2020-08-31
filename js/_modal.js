@@ -49,7 +49,7 @@
   }
 
   Modal.prototype.show = function (_relatedTarget) {
-    var that = this
+    var that = this // this：Modal实例对象
     var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
 
     this.$element.trigger(e)
@@ -65,9 +65,11 @@
     this.escape()
     this.resize()
 
+    // 添加关闭按钮事件
     this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
     this.$dialog.on('mousedown.dismiss.bs.modal', function () {
+      console.log('这个会执行吗')
       that.$element.one('mouseup.dismiss.bs.modal', function (e) {
         if ($(e.target).is(that.$element)) that.ignoreBackdropClick = true
       })
@@ -124,8 +126,8 @@
 
     this.$element
       .removeClass('in')
-      // .off('click.dismiss.bs.modal')
-      // .off('mouseup.dismiss.bs.modal')
+      .off('click.dismiss.bs.modal')
+      .off('mouseup.dismiss.bs.modal')
 
     this.$dialog.off('mousedown.dismiss.bs.modal')
 
@@ -290,12 +292,11 @@
   // =======================
 
   function Plugin(option, _relatedTarget) {
-    console.log('_relatedTarget', _relatedTarget)
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.modal')
       var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
+      console.log('options', options)
       if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
       if (typeof option == 'string') data[option](_relatedTarget)
       else if (options.show) data.show(_relatedTarget)
@@ -327,9 +328,7 @@
     var t = $this.data('target') // 可以使用data(*)来获取data-*的值
     // 获取模态窗元素
     var $target = $(t || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-    console.log($target)
     var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
-    
     if ($this.is('a')) e.preventDefault()
 
     /* $target.one('show.bs.modal', function (showEvent) {

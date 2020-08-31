@@ -9754,6 +9754,7 @@ jQuery.offset = {
 		}
 
 		curOffset = curElem.offset();
+		console.log('curOffset', curOffset)
 		curCSSTop = jQuery.css( elem, "top" );
 		curCSSLeft = jQuery.css( elem, "left" );
 		calculatePosition = ( position === "absolute" || position === "fixed" ) &&
@@ -9778,16 +9779,20 @@ jQuery.offset = {
 		}
 
 		if ( options.top != null ) {
+			// 这个地方减去了自身原先的偏移量的值
 			props.top = ( options.top - curOffset.top ) + curTop;
 		}
 		if ( options.left != null ) {
+			// 这个地方减去了自身原先的便宜量的值
 			props.left = ( options.left - curOffset.left ) + curLeft;
 		}
 
 		if ( "using" in options ) {
 			options.using.call( elem, props );
-
+			
 		} else {
+			// console.log('这个了', props)
+			// 设置样式
 			curElem.css( props );
 		}
 	}
