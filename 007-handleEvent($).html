@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+      .box {
+        height: 200px;
+        width: 200px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">确定</button>
+    <div class="box">哈哈</div>
+    <script src="js/jquery.js"></script>
+    <script>
+      $.event.special.test = {
+        bindType: 'click',
+        handle: function(e) {
+          console.log('e:', e)
+          return e.handleObj.handler.apply(this, arguments)
+        }
+      }
+
+      $('#btn').on('test', function com (e) {
+        console.log(e)
+        console.log(this)
+      })
+
+      $('.box').on('click', function() {
+        console.log('aa')
+      })
+    </script>
+  </body>
+</html>
