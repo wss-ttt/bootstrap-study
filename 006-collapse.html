@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+      .box {
+        height: 400px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-target="#collapseExample"
+    >
+      Button with data-target
+    </button>
+    <div class="collapse" id="collapseExample">
+      <div class="well">好好学习</div>
+      <div class="well">好好学习</div>
+    </div>
+    <div class="box">
+      哈哈...
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/transition.js"></script>
+    <script src="js/collapse.js"></script>
+    <script>
+      $('button').on('click', function() {
+        $('.collapse').collapse('toggle')
+      })
+    </script>
+  </body>
+</html>
