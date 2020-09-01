@@ -25,12 +25,12 @@
     loadingText: 'loading...'
   }
 
-  Button.prototype.setState = function (state) {
+  Button.prototype.setState = function (state) { // loading | reset
     var d    = 'disabled'
     var $el  = this.$element
     var val  = $el.is('input') ? 'val' : 'html' // 有可能是button标签 有可能是 input 标签
     var data = $el.data()
-    state += 'Text'
+    state += 'Text' // loadingText | resetText
     if (data.resetText == null) $el.data('resetText', $el[val]())
     // push to event loop to allow forms to submit
     setTimeout($.proxy(function () {
@@ -89,7 +89,7 @@
   function Plugin(option) {
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.button') // 这行代码是干什么用的
+      var data    = $this.data('bs.button') // 这行代码是干什么用的 => 用于判断用的
       var options = typeof option == 'object' && option
 
       // if (!data) $this.data('bs.button', (data = new Button(this, options)))
