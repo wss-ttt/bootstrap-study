@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+      .box {
+        width: 400px;
+        height: 400px;
+        margin: 200px auto;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      type="button"
+      class="btn btn-primary"
+    >
+      登录
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+    >
+      登录
+    </button>
+    <script src="js/jquery.js"></script>
+    <!-- <script src="js/button.js"></script> -->
+    <script src="js/_button.js"></script>
+    <script>
+      $('button').on('click', function() {
+        $(this).button('loading')
+
+        // 模拟请求过程
+        setTimeout(() => {
+          $(this).button('reset')
+        }, 2000)
+      })
+    </script>
+  </body>
+</html>
