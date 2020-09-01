@@ -28,15 +28,12 @@
   Button.prototype.setState = function (state) {
     var d    = 'disabled'
     var $el  = this.$element
-    var val  = $el.is('input') ? 'val' : 'html'
+    var val  = $el.is('input') ? 'val' : 'html' // 有可能是button标签 有可能是 input 标签
     var data = $el.data()
-
     state += 'Text'
-
     if (data.resetText == null) $el.data('resetText', $el[val]())
-
     // push to event loop to allow forms to submit
-    /* setTimeout($.proxy(function () {
+    setTimeout($.proxy(function () {
       $el[val](data[state] == null ? this.options[state] : data[state])
 
       if (state == 'loadingText') {
@@ -46,10 +43,10 @@
         this.isLoading = false
         $el.removeClass(d).removeAttr(d).prop(d, false)
       }
-    }, this), 0) */
+    }, this), 0)
 
     // 使用箭头函数代替 $.proxy
-    setTimeout(() => {
+    /* setTimeout(() => {
       $el[val](data[state] == null ? this.options[state] : data[state])
 
       if (state == 'loadingText') {
@@ -59,7 +56,7 @@
         this.isLoading = false
         $el.removeClass(d).removeAttr(d).prop(d, false)
       }
-    }, 0)
+    }, 0) */
   }
 
   Button.prototype.toggle = function () {
@@ -80,6 +77,7 @@
       if (changed) $input.trigger('change')
     } else {
       this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
+      // 动态切换样式名
       this.$element.toggleClass('active')
     }
   }
@@ -91,13 +89,26 @@
   function Plugin(option) {
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.button')
+      var data    = $this.data('bs.button') // 这行代码是干什么用的
       var options = typeof option == 'object' && option
 
-      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+      // if (!data) $this.data('bs.button', (data = new Button(this, options)))
+      // 上面这行代码等价下面这行代码
+      if(!data) {
+        // 创建button实例对象
+        data = new Button(this, options)
+        $this.data('bs.button', data)
+      }
 
-      if (option == 'toggle') data.toggle()
-      else if (option) data.setState(option)
+      // if (option == 'toggle') data.toggle()
+      // else if (option) data.setState(option)
+
+      // 上面代码等价下面的代码
+      if(option == 'toggle') {
+        data.toggle()
+      } else if(option) {
+        data.setState(option)
+      }
     })
   }
 
