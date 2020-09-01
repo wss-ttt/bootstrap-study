@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+      .box {
+        height: 200px;
+        width: 200px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">点击执行click事件</button>
+    <input type="text" id="input" />
+    <div class="box">哈哈</div>
+    <script>
+      var Events = {
+        handleEvent: function (event) {
+          switch (event.type) {
+            case 'click':
+              this.clickEvent(event)
+              break
+            case 'focus':
+              this.focusEvent(event)
+              break
+          }
+        },
+        clickEvent: function () {
+          console.log('执行了click的事件')
+        },
+        focusEvent: function () {
+          console.log('执行了focus的事件')
+        }
+      }
+      if (window.addEventListener) {
+        document
+          .getElementById('btn')
+          .addEventListener('click', Events, false)
+        document
+          .getElementById('input')
+          .addEventListener('focus', Events, false)
+      }
+
+      document.querySelector('.box').addEventListener('click', {
+        handleEvent: function(e) {
+          console.log('哈哈', e)
+        }
+      })
+    </script>
+  </body>
+</html>
