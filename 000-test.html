@@ -9,66 +9,34 @@
         padding: 0;
         box-sizing: border-box;
       }
+      .box {
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+        transition: all 1s;
+      }
+      .in {
+        width: 200px;
+        height: 200px;
+        opacity: 0.3;
+      }
     </style>
   </head>
   <body>
-    <input type="text" id="input" />
-    <div class="box">确定</div>
-
-    <div class="box2">哈哈</div>
-    <div class="box3">呵呵</div>
+    <button type="button">动画</button>
+    <div class="box"></div>
     <script src="js/jquery.js"></script>
+    <script src="js/transition.js"></script>
     <script>
-      ;+(function ($) {
-        function testEvent(e) {
-          // 自定义事件
-          var ev = jQuery.Event('hide.bs', {
-            // 名称可以自定义(但是不要叫data)
-            params: {
-              name: '张三',
-              age: 18
-            },
-            // 名称可以自定义
-            relatedTarget: $('#input-1')[0]
-          })
-          // 触发自定义事件
-          $('#input').trigger(ev)
-        }
-        // 监听原生的click事件
-        $('#input').on('click', testEvent)
-      })(jQuery)
-
       $(function () {
-        // 监听自定义事件
-        $('#input').on('hide.bs', function (event) {
-          console.log(event.relatedTarget.tagName) // INPOUT
-          console.log(event.params) // {name: '张三', age: 18}
+        $('button').on('click', function () {
+          $('.box').addClass('in')
         })
 
-        $('.box').on('click', function(e) {
-          console.log(e)
+        $('.box').one('bsTransitionEnd', function () {
+          console.log('动画执行完毕')
         })
-
-        document.querySelector('.box').onclick = function(e) {
-          console.log(e)
-        }
       })
-    </script>
-    <script>
-      $('.box2').on('click', function(e) {
-        console.log('ee', e)
-        // 定义一个自定义事件
-        var ev = $.Event('show.bs.tab')
-        
-        // 同时触发这个自定义事件
-        $('.box3').trigger(ev)
-      })
-
-
-      $('.box3').on('show.bs.tab', function(e) {
-        console.log('e', e)
-      })
-
     </script>
   </body>
 </html>
